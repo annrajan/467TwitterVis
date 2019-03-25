@@ -1,5 +1,8 @@
 import gensim
 import json
+import sys
+from nltk import word_tokenize
+from nltk.stem import WordNetLemmatizer
 
 # https://towardsdatascience.com/topic-modeling-and-latent-dirichlet-allocation-in-python-9bf156893c24
 # https://radimrehurek.com/gensim/models/ldamodel.html
@@ -46,14 +49,24 @@ data = [
 'Nam imperdiet nulla non dolor maximus rutrum'
 ]
 
-processed_tweets = [line.lower().split(' ') for line in data]
+with open('tweets.txt','r') as f:
+   data = f.readlines()
+
+lemmatizer = WordNetLemmatizer()
+
+processed_tweets = []
+for line in data:
+   # line = line.lower().split(' ')
+   line = word_tokenize(line.decode('utf8'))
+   line = [lemmatizer.lemmatize(w) for w in line if (len(w) > 3)]
+   processed_tweets.append(line)
 
 # create model
 dictionary = gensim.corpora.Dictionary(processed_tweets)
 bow_corpus = [dictionary.doc2bow(doc) for doc in processed_tweets]
 tfidf = gensim.models.TfidfModel(bow_corpus)
 tfidf_corpus = tfidf[bow_corpus]
-model = gensim.models.LdaModel(bow_corpus, num_topics=3, id2word=dictionary)
+model = gensim.models.LdaModel(bow_corpus, num_topics=10, id2word=dictionary)
 
 # sort tweets into topics
 # [ (topic_id, tweet) ]
