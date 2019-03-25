@@ -81,7 +81,7 @@ for i in range(len(tfidf_corpus)):
 
 # get top words for all topics
 # [ ( topic_id, [ words ] ) ]
-topic_words = model.show_topics(formatted=False,num_topics=-1,num_words=5)
+topic_words = model.show_topics(formatted=False,num_topics=-1,num_words=10)
 topic_words = [(x[0], [y[0] for y in x[1]]) for x in topic_words]
 
 # put the above two lists into one json
