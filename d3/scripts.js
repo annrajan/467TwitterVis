@@ -1,14 +1,5 @@
-
-let w = window.innerWidth,
-    h = window.innerHeight;
-
-let svg = d3.select('body')
-    .append('svg')
-    .attr('width', w)
-    .attr('height', h);
-
-let data_mini = "data/minidata.json";
-let data_tweets_2 = "../sorted_tweet_data_2.json";
+let data_mini = 'data/minidata.json';
+let data_tweets_2 = '../sorted_tweet_data_2.json';
 let data = null;
 
 d3.json(data_mini, function(error, json) {
@@ -39,56 +30,65 @@ d3.json(data_mini, function(error, json) {
 });
 
 function dataReady(data, connections){
+    let w = window.innerWidth,
+        h = window.innerHeight;
+
     let radius = 100;
+
+    let svg = d3.select('body')
+        .append('svg')
+        .attr('width', w)
+        .attr('height', h);
 
     let force = d3.layout.force()
         .nodes(data)
-        .linkDistance(radius)
+        .links(connections)
+        .linkDistance(radius * 3 )
         .on('tick', tick)
         .start();
 
     let nodes = svg.selectAll('.node')
-        .data(data);
-
-    let links = svg.selectAll('.line')
-        .data(connections);
-
-    console.log(links);
-
-    let linkEnter = links.enter().append('line');
-
-    console.log(nodes);
-
-    let nodeEnter = nodes.enter().append('g')
+        .data(data)
+        .enter().append('g')
         .attr('class', 'node');
 
-    nodeEnter.append('circle')
+    nodes.append('circle')
         .attr('cx', 0)
         .attr('cy', 0)
         .attr('r', radius);
 
-    nodeEnter.append('text')
+    nodes.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.34em');
 
+    let links = svg.selectAll('.line')
+        .data(connections)
+        .enter().append('line');
 
-    svg.selectAll("circle").on("click", function(){
+    svg.selectAll('circle').on('click', function(){
         d3.select(this).attr('r', radius)
-            .style("fill","lightcoral")
-            .style("stroke","red");
+            .style('fill','lightcoral')
+            .style('stroke','red');
+        //data.tweets
     });
 
     function tick() {
-        svg.selectAll("circle").attr("cx", function(d) { return d.x = Math.max(radius, Math.min(w - radius, d.x)); })
-            .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); });
+        svg.selectAll('circle')
+            .attr('cx', function(d) { return d.x = Math.max(radius, Math.min(w - radius, d.x)); })
+            .attr('cy', function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); });
 
-        nodes.select('text').text(function(d) {
-            return "test text";
-        });
+        svg.selectAll('text')
+            .attr('cx', function(d) { return d.x = Math.max(radius, Math.min(w - radius, d.x)); })
+            .attr('cy', function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); })
+            .text(function() {
 
-        linkEnter.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+                console.log(nodes.data.tweets);
+                return 'aaaaaaaaaaaaaaaaaaaaa';
+            });
+
+        links.attr('x1', function(d) { return d.source.x; })
+            .attr('y1', function(d) { return d.source.y; })
+            .attr('x2', function(d) { return d.target.x; })
+            .attr('y2', function(d) { return d.target.y; });
     }
 }
