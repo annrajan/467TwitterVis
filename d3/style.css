@@ -17,3 +17,20 @@
 .node:hover text {
     fill: darkblue;
 }
+
+#visualization {
+    margin-top: 100px;
+    width: window_width;
+}
+
+h1 {
+    font-size: 14px;
+}
+
+h2 {
+    font-size: 12px;
+}
+
+p {
+    font-size: 11px;
+}

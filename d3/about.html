@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Twitter Portrait</title>
+</head>
+<body>
+<h1>About Twitter Portrait</h1>
+<p>
+    For this visualization, we were inspired by the different ways people can project portions of their personality via social media, particularly Twitter. Users have the capability to selectively display some of their thoughts and opinions on a variety of topics of their liking. Through our Twitter Personality visualization, we wanted to display the topics that users cared the most about.
+</p>
+<p>
+    For our data collection, we are using the Twitter API, specifically the GET statuses/user_timeline endpoint, which fetches tweets and retweets from a specified user's timeline. In reality, we ran into some issues with this API, so we were forced to manually collect this data.
+</p>
+<p>
+    Once the data was gathered, we applied the TF-IDF model to extract the most important topics. Using the topics and their corresponding words, we passed the data as a JSON to be visualized in the final output.
+</p>
+</body>
+</html>

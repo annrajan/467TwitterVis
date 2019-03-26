@@ -1,3 +1,12 @@
+let window_width = window.innerWidth;
+let window_height = window.innerHeight;
+let profile_height = 150;
+
+// let profile = d3.select('#profile');
+// profile.append('svg')
+//     .attr('width', window_width)
+//     .attr('height', profile_height);
+
 let data_mini = 'data/minidata.json';
 let data_tweets_2 = 'data/sorted_tweet_data_2.json';
 let data_one = 'data/onetopic.json';
@@ -31,15 +40,15 @@ d3.json(data_tweets_2, function(error, json) {
 });
 
 function dataReady(data, connections){
-    let w = window.innerWidth,
-        h = window.innerHeight;
+    let w = window_width,
+        h = window_height - profile_height;
 
     let radius_words = 100;
     let radius_tweets = 500;
-    let radius = 200;
+    let radius = 100;
     let link_distance = 500;
 
-    let svg = d3.select('body')
+    let svg = d3.select('#visualization')
         .append('svg')
         .attr('width', w)
         .attr('height', h);
