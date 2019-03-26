@@ -58,10 +58,10 @@ function dataReady(data, connections){
         .attr('r', radius);
 
     nodes.append('text')
+        .data(data)
         .attr('text-anchor', 'middle')
         .text(function() {
-            console.log(nodes.data);
-            return 'aaa';
+            return d3.select(this).datum().words;
         });
 
 
@@ -72,7 +72,7 @@ function dataReady(data, connections){
     svg.selectAll('g').on('click', function(){
         d3.select(this).select('text')
             .text(function() {
-                return 'aaaaaaaaaaaa';
+                return d3.select(this).datum().tweets;
             });
         //data.tweets
     });
