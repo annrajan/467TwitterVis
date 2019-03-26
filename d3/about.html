@@ -6,14 +6,29 @@
 </head>
 <body>
 <h1>About Twitter Portrait</h1>
+<h2>Who are you on Twitter?</h2>
 <p>
-    For this visualization, we were inspired by the different ways people can project portions of their personality via social media, particularly Twitter. Users have the capability to selectively display some of their thoughts and opinions on a variety of topics of their liking. Through our Twitter Personality visualization, we wanted to display the topics that users cared the most about.
+    People project themselves in different ways via social media. Through our visualization, we wanted to display the topics that users cared about the most by analyzing their Tweets.
+</p>
+<h2>Design and Methodology</h2>
+<p>
+    Each topic the user tweets about is represented as a word cloud.
 </p>
 <p>
-    For our data collection, we are using the Twitter API, specifically the GET statuses/user_timeline endpoint, which fetches tweets and retweets from a specified user's timeline. In reality, we ran into some issues with this API, so we were forced to manually collect this data.
+    Significant words from the user's tweets were found with TF-IDF (Term Frequency-Inverse Document Frequency). Words were grouped into topics using LDA (Latent Dirichlet Allocation).
 </p>
 <p>
-    Once the data was gathered, we applied the TF-IDF model to extract the most important topics. Using the topics and their corresponding words, we passed the data as a JSON to be visualized in the final output.
+    We collected text data from tweets using the Twitter API, specifically the GET statuses/user_timeline endpoint, which fetches tweets and retweets from a specified user's timeline.
+</p>
+<h2>Challenges</h2>
+<p>
+    We were forced to manually collect our tweet data due to some issues with the Twitter API.
+</p>
+<p>
+    Our chosen user for this demo, Shedd Aquarium, tweeted about many of the same topics, which may be why the division between topics was less clear than we had hoped. For example, there is overlap between the keywords belonging to each topic. In the future we could collect data from a user with more diverse content in their tweets to see how that would impact our results. Alternatively, we could try different variations on topic modeling algorithms.
+</p>
+<p>
+    Our initial design proved to be difficult to implement in practice, since the number of topics and length of tweets took up a lot of screen real estate. An alternative design approach would be to keep the interaction of letting the user to click each topic/word cloud to explore the tweets in that topic, but have the text of the tweets appear in a separate panel on the screen. The user could then scroll through the tweets like they were on a Twitter feed. This would preserve the context of the topics/word clouds as well.
 </p>
 </body>
 </html>
