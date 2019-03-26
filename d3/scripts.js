@@ -3,7 +3,7 @@ let data_tweets_2 = 'data/sorted_tweet_data_2.json';
 let data_one = 'data/onetopic.json';
 let data = null;
 
-d3.json(data_mini, function(error, json) {
+d3.json(data_tweets_2, function(error, json) {
     if (error) console.log(error);
     let rawData = json;
     let data = [];
@@ -34,7 +34,10 @@ function dataReady(data, connections){
     let w = window.innerWidth,
         h = window.innerHeight;
 
-    let radius = 100;
+    let radius_words = 100;
+    let radius_tweets = 500;
+    let radius = 200;
+    let link_distance = 500;
 
     let svg = d3.select('body')
         .append('svg')
@@ -44,7 +47,7 @@ function dataReady(data, connections){
     let force = d3.layout.force()
         .nodes(data)
         .links(connections)
-        .linkDistance(radius * 3 )
+        .linkDistance(link_distance )
         .on('tick', tick)
         .start();
 
@@ -105,6 +108,9 @@ function dataReady(data, connections){
         for(var i = 0; i<10; i++){
             // console.log(tweetSpans[0][i].textContent);
             tweetSpans[0][i].textContent = d3.select(this).datum().tweets[i];
+            tweetSpans
+                .attr('dx', tspan_x_offset*30)
+                .attr('dy', tspan_y_offset)
         }
     });
 
