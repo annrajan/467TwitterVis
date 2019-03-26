@@ -1,1 +1,1 @@
-Please link the github pages site where this is being hosted here!
+Please check out our work at https://annrajan.github.io/467TwitterVis/d3/index.html! 
