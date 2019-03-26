@@ -34,3 +34,8 @@ h2 {
 p {
     font-size: 11px;
 }
+
+#profilepic{
+    width:100px;
+    float:left;
+}

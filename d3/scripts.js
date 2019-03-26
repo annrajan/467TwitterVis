@@ -46,7 +46,7 @@ function dataReady(data, connections){
     let radius_words = 100;
     let radius_tweets = 500;
     let radius = 100;
-    let link_distance = 500;
+    let link_distance = 650;
 
     let svg = d3.select('#visualization')
         .append('svg')
@@ -56,7 +56,7 @@ function dataReady(data, connections){
     let force = d3.layout.force()
         .nodes(data)
         .links(connections)
-        .linkDistance(link_distance )
+        .linkDistance(link_distance)
         .on('tick', tick)
         .start();
 
