@@ -1,0 +1,15 @@
+.node circle {
+    fill: steelblue;
+    stroke: #333;
+    stroke-width: 2;
+}
+
+.node text {
+    opacity: 0;
+    fill: white;
+    font-size: 11px;
+}
+
+.node:hover circle {
+    fill: darkblue;
+}
