@@ -1,19 +1,19 @@
+:root {
+    --twitter-blue: #1DA1F2;
+}
+
 .node circle {
-    fill: steelblue;
+    fill: transparent;
     stroke: #333;
     stroke-width: 2;
 }
 
 .node text {
     opacity: 1;
-    fill: white;
+    fill: var(--twitter-blue);
     font-size: 11px;
 }
 
-.node:hover circle {
+.node:hover text {
     fill: darkblue;
 }
-
-/*.node:hover text {*/
-    /*opacity: 1;*/
-/*}*/

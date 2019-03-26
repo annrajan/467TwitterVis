@@ -25,7 +25,7 @@ d3.json(data_mini, function(error, json) {
             }
         }
     });
-    console.log(connections);
+
     dataReady(data, connections);
 });
 
@@ -59,16 +59,21 @@ function dataReady(data, connections){
 
     nodes.append('text')
         .attr('text-anchor', 'middle')
-        .attr('dy', '0.34em');
+        .text(function() {
+            console.log(nodes.data);
+            return 'aaa';
+        });
+
 
     let links = svg.selectAll('.line')
         .data(connections)
         .enter().append('line');
 
-    svg.selectAll('circle').on('click', function(){
-        d3.select(this).attr('r', radius)
-            .style('fill','lightcoral')
-            .style('stroke','red');
+    svg.selectAll('g').on('click', function(){
+        d3.select(this).select('text')
+            .text(function() {
+                return 'aaaaaaaaaaaa';
+            });
         //data.tweets
     });
 
@@ -78,13 +83,8 @@ function dataReady(data, connections){
             .attr('cy', function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); });
 
         svg.selectAll('text')
-            .attr('cx', function(d) { return d.x = Math.max(radius, Math.min(w - radius, d.x)); })
-            .attr('cy', function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); })
-            .text(function() {
-
-                console.log(nodes.data.tweets);
-                return 'aaaaaaaaaaaaaaaaaaaaa';
-            });
+            .attr('x', function(d) { return d.x = Math.max(radius, Math.min(w - radius, d.x)); })
+            .attr('y', function(d) { return d.y = Math.max(radius, Math.min(h - radius, d.y)); });
 
         links.attr('x1', function(d) { return d.source.x; })
             .attr('y1', function(d) { return d.source.y; })
