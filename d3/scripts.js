@@ -1,8 +1,9 @@
 let data_mini = 'data/minidata.json';
-let data_tweets_2 = '../sorted_tweet_data_2.json';
+let data_tweets_2 = 'data/sorted_tweet_data_2.json';
+let data_one = 'data/onetopic.json';
 let data = null;
 
-d3.json(data_mini, function(error, json) {
+d3.json(data_one, function(error, json) {
     if (error) console.log(error);
     let rawData = json;
     let data = [];
@@ -57,6 +58,10 @@ function dataReady(data, connections){
         .attr('cy', 0)
         .attr('r', radius);
 
+    let tspan_x_offset = -30;
+    let tspan_y_offset = -10;
+
+    // Version that puts everything on one line
     nodes.append('text')
         .data(data)
         .attr('text-anchor', 'middle')
@@ -64,18 +69,143 @@ function dataReady(data, connections){
             return d3.select(this).datum().words;
         });
 
+    // Version that adds separate tspan for each element to simulate \n
+    // nodes.append('text')
+    //     .data(data)
+    //     .attr('text-anchor', 'middle')
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[0];
+    //     })
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[1];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[2];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[3];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[4];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[5];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[6];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[7];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[8];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset)
+    //     .append('tspan')
+    //     .text(function() {
+    //         return d3.select(this).datum().words[9];
+    //     })
+    //     .attr('dx', tspan_x_offset)
+    //     .attr('dy', tspan_y_offset);
 
     let links = svg.selectAll('.line')
         .data(connections)
         .enter().append('line');
 
+    // Version that puts everything on one line
     svg.selectAll('g').on('click', function(){
         d3.select(this).select('text')
             .text(function() {
                 return d3.select(this).datum().tweets;
             });
-        //data.tweets
     });
+
+    // Version that adds separate tspan for each element to simulate \n
+    // svg.selectAll('g').on('click', function(){
+    //     d3.select(this).select('text')
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[0];
+    //         })
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[1];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[2];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[3];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[4];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[5];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[6];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[7];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[8];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset)
+    //         .append('tspan')
+    //         .text(function() {
+    //             return d3.select(this).datum().tweets[9];
+    //         })
+    //         .attr('dx', tspan_x_offset)
+    //         .attr('dy', tspan_y_offset);
+    // });
 
     function tick() {
         svg.selectAll('circle')

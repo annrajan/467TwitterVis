@@ -5,7 +5,7 @@
 .node circle {
     fill: transparent;
     stroke: #333;
-    stroke-width: 2;
+    stroke-width: 0;
 }
 
 .node text {
